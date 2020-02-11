@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { withRouter } from 'react-router-dom'
 
 const MenuItemEl = styled.div`
   min-width: 30%;
@@ -63,12 +64,13 @@ const MenuItemEl = styled.div`
   }
 `
 
-const MenuItem = ({title, imageUrl, size}) => {
-  console.log(size)
+const MenuItem = ({title, imageUrl, size, history, linkUrl, match}) => {
   return (
     <MenuItemEl 
       size={size} 
-      image={imageUrl}>
+      image={imageUrl}
+      onClick={() => history.push(`${match.url}${linkUrl}`)}
+    >
       <div className="background-image"/>
       <div className="content">
         <h1 className="title">{title.toUpperCase()}</h1>
@@ -78,4 +80,4 @@ const MenuItem = ({title, imageUrl, size}) => {
   )
 }
 
-export default MenuItem
+export default withRouter(MenuItem);

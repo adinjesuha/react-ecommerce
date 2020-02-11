@@ -11,12 +11,12 @@ const DirectoryElement = styled.div`
 `
 
 const Directory = () => {
-  const [ sections, setSections ] = useState([
+  const [ sections ] = useState([
     {
       title: 'hats',
       imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
       id: 1,
-      linkUrl: 'shop/hats'
+      linkUrl: 'hats'
     },
     {
       title: 'jackets',
@@ -47,12 +47,10 @@ const Directory = () => {
   ])
   return (
     <DirectoryElement>
-      {sections.map(({title, imageUrl, id, size}) => (
+      {sections.map(({id, ...otherSectionProps}) => (
         <MenuItem 
           key={id} 
-          title={title} 
-          imageUrl={imageUrl}
-          size={size}
+          {...otherSectionProps}
         />
       ))}
     </DirectoryElement>
