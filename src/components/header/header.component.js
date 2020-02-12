@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { auth } from '../../firebase/firebase.util'
 
 import { ReactComponent as Logo } from '../../assets/crown.svg'
 
@@ -26,19 +27,25 @@ const Wrapper = styled.div`
 
     .option {
       padding: 10px 15px;
+      cursor: pointer;
     }
   }
 `
 
-const Header = () => {
+const Header = ({currentUser}) => {
   return (
     <Wrapper>
       <Link to="/" className="logo-container">
         <Logo  className="logo"/>
       </Link>
       <div className="options">
-        <Link to="/shop" className="option">Shop</Link>
-        <Link to="/contact" className="option">Contact</Link>
+        <Link to="/shop" className="option">SHOP</Link>
+        <Link to="/contact" className="option">CONTACT</Link>
+        {
+          currentUser 
+          ? <div className="option" onClick={() => auth.signOut()}>SIGN OUT</div>
+          : <Link className="option" to="/signin">SIGN IN</Link>  
+        }
       </div>
     </Wrapper>
   )

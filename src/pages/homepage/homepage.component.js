@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import Directory from '../../components/directory/directory.component'
 
-const Homepage = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,9 +12,9 @@ const Homepage = styled.div`
 
 
 const HomePage = () => (
-  <Homepage>
+  <Wrapper>
     <Directory />
-  </Homepage>
+  </Wrapper>
 )
 
 export default HomePage
