@@ -39,7 +39,7 @@ const SignIn = () => {
       })
     }catch (error) {
       console.log(error);
-    }
+    } 
   }
   
   const handleChange = event => {
@@ -49,7 +49,7 @@ const SignIn = () => {
       [name]: value
     }) 
   }
-
+  const { email, password } = user;
   return (
     <Wrapper>
       <h2>I already have an account</h2>
@@ -58,7 +58,7 @@ const SignIn = () => {
         <FormInput 
           type="email" 
           name="email" 
-          value={user.email} 
+          value={email} 
           handleChange={handleChange}
           label="email"
           required
@@ -66,7 +66,7 @@ const SignIn = () => {
         <FormInput 
           type="password" 
           name="password" 
-          value={user.password} 
+          value={password} 
           handleChange={handleChange}
           label="password"
           required
