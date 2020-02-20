@@ -1,5 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+
+import { addItem } from '../../redux/cart/cart.actions'
+import CustomButton from '../custom-button/custom-button.component'
 
 const Wrapper = styled.div`
   width: 22%;
@@ -7,6 +11,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   height: 350px;
   align-items: center;
+  position: relative;
 
   .image {
     background: url(${({image}) => image});
@@ -33,17 +38,40 @@ const Wrapper = styled.div`
       width: 10%;
     }
   }
-
+  > button{
+    width: 80%;
+    opacity: 0.7;
+    position: absolute;
+    top: 255px;
+    display: none;
+  }
+  &:hover{
+    .image{
+      opacity: 0.8;
+    }
+    > button {
+      opacity: 0.85;
+      display: flex;
+    }
+  }
 `
 
-const CollectionItem = ({id, name, price, imageUrl}) => (
-  <Wrapper image={imageUrl}>
-    <div className="image" />
-    <div className="collection-footer">
-      <span className="name">{name}</span>
-      <span className="price">{price}</span>
-    </div>
-  </Wrapper>
-)
+const CollectionItem = ({ item, addItem }) => {
+  const { name, price, imageUrl } = item
+  return(
+    <Wrapper image={imageUrl}>
+      <div className="image" />
+      <div className="collection-footer">
+        <span className="name">{name}</span>
+        <span className="price">{price}</span>
+      </div>
+      <CustomButton onClick={() => addItem(item)} inverted>Add to cart</CustomButton>
+    </Wrapper>
+  )
+}
 
-export default CollectionItem
+const mapDispatchToProps = dispatch => ({
+  addItem: item => dispatch(addItem(item))
+})
+
+export default connect(null, mapDispatchToProps)(CollectionItem)
