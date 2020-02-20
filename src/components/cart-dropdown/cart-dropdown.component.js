@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 
 import CustomButton from '../custom-button/custom-button.component'
+import CartItem from '../cart-item/cart-item.component'
 
 const Wrapper = styled.div`
   position: absolute;
@@ -28,11 +30,22 @@ const Wrapper = styled.div`
   }
 `
 
-const CartDropdown = () => (
+const CartDropdown = ({cartItems}) => (
   <Wrapper>
-    <div className="cart-items" />
+    <div className="cart-items" >
+      {
+        cartItems.map(cartItem => (
+          <CartItem key={cartItem.id} item={cartItem}/>
+          )
+        )
+      }
+    </div>
     <CustomButton>GO TO CHECKOUT</CustomButton>
   </Wrapper>
 )
 
-export default CartDropdown
+const mapStateToProps = ({cart: { cartItems}}) => ({
+  cartItems
+})
+
+export default connect(mapStateToProps)(CartDropdown)
