@@ -6,7 +6,7 @@ import { addItem } from '../../redux/cart/cart.actions'
 import CustomButton from '../custom-button/custom-button.component'
 
 const Wrapper = styled.div`
-  width: 22%;
+  width: 22vw;
   display: flex;
   flex-direction: column;
   height: 350px;
