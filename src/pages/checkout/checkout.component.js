@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect'
 
 import { selectCartItems, selectCartTotal } from '../../redux/cart/cart.selectors'
 import CheckoutItem from '../../components/checkout-item/checkout-item.component'
+import StripeButton from '../../components/stripe-button/stripe-button.component'
 
 const Wrapper = styled.div`
   width: 55%;
@@ -37,6 +38,18 @@ const Wrapper = styled.div`
     font-size: 36px;
   }
 
+  button{
+    margin-left: auto;
+    margin-top: 50px;
+  }
+
+  .test-worning{
+    text-align: center;
+    margin-top: 40px;
+    font-size: 24px;
+    color: red;
+  } 
+
 `
 
 const Checkout = ({cartItems, total}) => (
@@ -64,9 +77,13 @@ const Checkout = ({cartItems, total}) => (
         )
       )
     }
-    <div className="total">
-      <span>TOTAL: ${total}</span>
+    <div className="total"><span>TOTAL: ${total}</span></div>
+    <div className="test-worning">
+      *Please use the following test credit card for payments*
+      <br />
+      42424 4242 4242 4242 - Exp: 01/21 - CVV: 123 
     </div>
+    <StripeButton price={total} />
   </Wrapper>
 )
 
@@ -75,4 +92,6 @@ const mapStateToProps = createStructuredSelector({
   total: selectCartTotal
 })
 
-export default connect(mapStateToProps)(Checkout)
+export default connect(
+  mapStateToProps
+)(Checkout)
